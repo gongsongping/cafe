@@ -1,0 +1,15 @@
+<!-- <a id="btn-prev" class="button button-assertive">pre</a> -->
+<!-- <a id="btn-next" class="button button-assertive">next</a> -->
+<ion-slides options="options" slider="data.slider" style="height:320px;">
+  <ion-slide-page ng-repeat="p in photos">
+    <div style="position:relative;display:inline-block;padding:2px;">
+      <p ng-if="p.content" contenteditable='true' style="max-width:200px;overflow-y:hidden;white-space:nowrap;text-decoration:none;">{{p.content}}</p>
+      <p style="position:absolute;bottom:300px;width:100px; background-color:LightCyan; color:black;" ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
+      <img src="{{p.url}}" style="width: auto; max-height:320px;">
+    </div>
+  </ion-slide-page>
+  <div style="display:inline; width: 300px; height: 300px;padding:10px;">
+    <button ng-show="dataLength == limit" ng-click="loadMore()" class="button button-clear button-assertive" style="position:absolute;bottom:200px;">load more ... </button>
+    <button ng-hide="dataLength == limit" class="button button-clear button-stable" style="position:absolute;bottom:200px;">no more</button>
+  </div>
+</ion-slides>

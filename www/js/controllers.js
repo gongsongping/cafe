@@ -106,34 +106,34 @@ angular.module('starter.controllers', [])
     $state.go($state.current, {}, {reload: true})
   }
   $scope.upPhoto = function() {
-      Qiniu.ngFileUp($scope.temfile).then(function (resp) {
-        // http://7xj5ck.com1.z0.glb.clouddn.com/2015-11-28T06%3A11%3A25.113Z// console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))
-        $scope.cafe.key = resp.data.key
-        var cafe = new Cafe($scope.cafe) //{key: resp.data.key, content: $scope.content})
-        cafe.$save(function(data) {
-          $state.go('tab.home', {}, {reload: true})
-        })
-      }, function (resp) {
-        $scope.status= resp.status; console.log('Error status: ' + resp.status)
-      }, function (evt) {
-        $scope.uppercent = parseInt(100.0 * evt.loaded / evt.total)
-        // console.log('progress: ' + $scope.uppercent + '% ' + evt.config.data.file.name)
+    Qiniu.ngFileUp($scope.temfile).then(function (resp) {
+      // http://7xj5ck.com1.z0.glb.clouddn.com/2015-11-28T06%3A11%3A25.113Z// console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))
+      $scope.cafe.key = resp.data.key
+      var cafe = new Cafe($scope.cafe) //{key: resp.data.key, content: $scope.content})
+      cafe.$save(function(data) {
+        $state.go('tab.home', {}, {reload: true})
       })
+    }, function (resp) {
+      $scope.status= resp.status; console.log('Error status: ' + resp.status)
+    }, function (evt) {
+      $scope.uppercent = parseInt(100.0 * evt.loaded / evt.total)
+      // console.log('progress: ' + $scope.uppercent + '% ' + evt.config.data.file.name)
+    })
   }
 })
 
 .controller('CafeCtrl', function($scope, $http, $rootScope, $state, $window, $resource, Cafe) {
   $scope.photos = [];$scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
-      Cafe.query({page: $scope.page, lastId: $scope.lastId})
-      .$promise.then(function(data) {
-        var middle; data.length%2 == 0?(middle = data.length/2):(middle = (data.length+1)/2)
-        $scope.photos.push(data.slice(0,middle))
-        $scope.photos.push(data.slice(middle))
-        // $scope.photos = $scope.photos.concat(data)
-        $scope.page += 1
-        $scope.$broadcast('scroll.infiniteScrollComplete')
-      })
+    Cafe.query({page: $scope.page, lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      var middle; data.length%2 == 0?(middle = data.length/2):(middle = (data.length+1)/2)
+      $scope.photos.push(data.slice(0,middle))
+      $scope.photos.push(data.slice(middle))
+      // $scope.photos = $scope.photos.concat(data)
+      $scope.page += 1
+      $scope.$broadcast('scroll.infiniteScrollComplete')
+    })
   }
 
 })
@@ -156,7 +156,28 @@ angular.module('starter.controllers', [])
     }
   }
   $scope.loadMore()
-
+  $scope.options = {
+    loop: true,
+    setWrapperSize: true,
+    autoHeight: true,
+    roundLengths: true,
+    freeMode: true,
+    effect: 'coverflow',
+    cube: {
+      shadow: false,
+      slideShadows: true,
+      shadowOffset: 20,
+      shadowScale: 0.94
+    },
+    nextButton: '#btn-next',
+    prevButton: '#btn-prev',
+    autoplay: 2000,
+    speed: 500
+  }
+  $scope.data = {};
+  $scope.$watch('data.slider', function(nv, ov) {
+    $scope.slider = $scope.data.slider;
+  })
 })
 
 .controller('AccountCtrl', function($scope,$http,$cordovaCamera,$cordovaCapture) {
