@@ -16,7 +16,7 @@
       <div ng-repeat="ps in photos" class="row" style="padding:0px;">
         <div ng-repeat="p in ps" class="col" style="padding:0.2px;">
           <a href="#/tab/cafe/users/{{p.user.id}}">
-            <div style="position:relative;width: 100%; height: 0; padding-top: 100%; background-color:LightCyan; background-image: url({{p.url}});background-size: cover;background-position: center center;">
+            <div style="position:relative;width: 100%; height: 0; padding-top: 100%; background-color:LightCyan; background-image: url({{p.url+'?imageView/1/w/200/h/200'}});background-size: cover;background-position: center center;">
               <p style="position:absolute; bottom:5px; width:auto; margin:0px;background-color:LightCyan; color:black;">{{p.user.name}} {{p.user.description}}</p>
             </div>
           </a>
