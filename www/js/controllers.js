@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
   }
   $scope.slideHasChanged = function($index) {
     // $ionicScrollDelegate.resize();
-    console.log($ionicSlideBoxDelegate.currentIndex() + 'ddddd')
+    // console.log($ionicSlideBoxDelegate.currentIndex() + 'ddddd')
   }
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
@@ -41,10 +41,10 @@ angular.module('starter.controllers', [])
         $window.localStorage.token = data.token
         $rootScope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
-        console.log($window.localStorage.token)
+        // console.log($window.localStorage.token)
         $state.go('tab.cafe', {}, {reload: false})
       } else {
-        console.log(data.err)
+        // console.log(data.err)
         $rootScope.loginErr = data.err
       }
     })
@@ -64,11 +64,11 @@ angular.module('starter.controllers', [])
           $window.localStorage.token = data.token
           $rootScope.currentUser = Boolean($window.localStorage.token)
           $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
-          console.log($window.localStorage.token)
+          // console.log($window.localStorage.token)
           $state.go('tab.cafe', {}, {reload: true})
           // $window.location.reload()
         } else {
-          console.log(data.err)
+          // console.log(data.err)
           $rootScope.signupErr = data.err
         }
       })
@@ -83,7 +83,7 @@ angular.module('starter.controllers', [])
     if ($scope.dataLength == $scope.limit){
       Cafe.get({id:0, page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
-        console.log(JSON.stringify(data))
+        // console.log(JSON.stringify(data))
         $scope.dataLength = data.photos.length
         $scope.photos = $scope.photos.concat(data.photos)
         if ($scope.page == 0){$scope.user = data.user}
@@ -144,7 +144,7 @@ angular.module('starter.controllers', [])
     if ($scope.dataLength == $scope.limit){
       Cafe.get({id:$stateParams.id, page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
-        console.log(JSON.stringify(data))
+        // console.log(JSON.stringify(data))
         $scope.dataLength = data.photos.length
         $scope.photos = $scope.photos.concat(data.photos)
         if ($scope.page == 0){$scope.user = data.user}

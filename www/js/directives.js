@@ -10,9 +10,9 @@ angular.module('starter.directives')
        } else {
          $rootScope.containerwidth = document.body.clientWidth
        }
-      console.log(window.innerWidth)
-      console.log(document.body.clientWidth)
-      console.log($rootScope.containerwidth)
+      // console.log(window.innerWidth)
+      // console.log(document.body.clientWidth)
+      // console.log($rootScope.containerwidth)
     }
   }
 })

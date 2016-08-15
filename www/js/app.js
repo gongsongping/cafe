@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $rootScope.$on('qiniuUPdate', function() {
     $resource('http://changiif.com/uptoken').get().$promise.then(function(data) {
       $window.localStorage.qiniuToken = data.uptoken
-      console.log('qiniuT  ' + $window.localStorage.qiniuToken)
+      // console.log('qiniuT  ' + $window.localStorage.qiniuToken)
     })
   })
   $rootScope.$broadcast('qiniuUPdate')
