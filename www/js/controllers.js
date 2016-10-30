@@ -123,14 +123,69 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CafeCtrl', function($scope, $http, $rootScope, $state, $window, $resource, Cafe) {
+  // $scope.$on("$ionicView.beforerEnter", function (event, data) {
+    var demo = new Vue({
+      el: '#demo',
+      created: function () {
+        console.log('demo created')
+      },
+      data: {
+        imageSrc:"http://7xj5ck.com1.z0.glb.clouddn.com/2016-01-07T11:44:55.109Z",
+        message: window.test,
+        photos:[],
+        msgs: ['a', 'b', 'c']
+      },
+      methods: {
+        add: function () {
+          this.msgs.push(this.message)
+        },
+        del: function (m, i) {
+          this.msgs.splice(i, 1)
+          //_.pull(this.msgs,m)
+          //this.msgs.$remove(m)
+          console.log(_.head(this.msgs))
+        },
+        update: function (m, i, e) {
+          //this.msgs.splice(i,1)
+          // var temp = this.msgs
+          // temp[i] = e.target.value
+          this.msgs[i] = e.target.value
+          // this.msgs = temp
+          console.log(e.target.value)
+          console.log(this.msgs)
+          console.log(m)
+        },
+        load: function () {
+          // this.$http.get('https://github.com/vuejs/vue-resource').then((response) => {
+          //   // success callback
+          // }, (response) => {
+          //   // error callback
+          // }
+          // );
+        }
+      }
+    })
+  // });
+  // console.log(demo.msgs);
+
   $scope.photos = [];$scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
+  // $scope.loadMore = function() {
+  //   Cafe.query({page: $scope.page, lastId: $scope.lastId})
+  //   .$promise.then(function(data) {
+  //     var middle; data.length%2 == 0?(middle = data.length/2):(middle = (data.length+1)/2)
+  //     $scope.photos.push(data.slice(0,middle))
+  //     $scope.photos.push(data.slice(middle))
+  //     // $scope.photos = $scope.photos.concat(data)
+  //     $scope.page += 1
+  //     $scope.$broadcast('scroll.infiniteScrollComplete')
+  //   })
+  // }
   $scope.loadMore = function() {
     Cafe.query({page: $scope.page, lastId: $scope.lastId})
-    .$promise.then(function(data) {
-      var middle; data.length%2 == 0?(middle = data.length/2):(middle = (data.length+1)/2)
-      $scope.photos.push(data.slice(0,middle))
-      $scope.photos.push(data.slice(middle))
-      // $scope.photos = $scope.photos.concat(data)
+      .$promise.then(function(data) {
+      // console.log(data);
+      demo.photos = demo.photos.concat(data)
+      // console.log(demo.photos);
       $scope.page += 1
       $scope.$broadcast('scroll.infiniteScrollComplete')
     })
