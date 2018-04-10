@@ -100,7 +100,9 @@ angular.module('starter.controllers', [])
 .controller('UphotoCtrl', function($scope, $http, $state, $rootScope, $window, Qiniu, Cafe) {
   $rootScope.$broadcast('qiniuUPdate'); $scope.cafe = {content:''}; $scope.temfiles = []
   $scope.listFiles = function(f) {
+    console.log(f);
     $scope.temfile = f; //$scope.temfiles.push(f) // console.log($scope.cafe.content)
+    console.log($scope.temfile);
   }
   $scope.refresh = function() {
     $state.go($state.current, {}, {reload: true})
